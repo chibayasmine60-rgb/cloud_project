@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add announcement - University of Boumerdès</title>
+  <link rel="icon" href="img/logo.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="admin">
+    <aside class="sidebar">
+      <img class="login-logo" src="img/logo.png" alt="Logo of the university">
+      <p><strong>University of Boumerdès</strong><br><small>Admin panel</small></p>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="announcements.html">Public announcements</a>
+      <a href="index.html">View website</a>
+      <a href="login.html">Sign out</a>
+    </aside>
+
+    <main class="admin-main">
+      <p class="small-text">Administration</p>
+      <h1>Add announcement</h1>
+
+      <form id="announcementForm" class="form">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" maxlength="200" required>
+
+        <label for="category">Category</label>
+        <select id="category" name="category">
+          <option>Campus</option>
+          <option>Academic</option>
+          <option>Events</option>
+        </select>
+
+        <label for="content">Content</label>
+        <textarea id="content" name="content" rows="6" required></textarea>
+
+        <p id="message"></p>
+
+        <button class="btn" type="submit">Publish</button>
+        <a class="btn btn-light" href="dashboard.html">Cancel</a>
+      </form>
+    </main>
+  </div>
+
+  <script>
+    const form = document.getElementById("announcementForm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const title = document.getElementById("title").value;
+      const content = document.getElementById("content").value;
+
+      try {
+        const response = await fetch("/api/announcements", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            title: title,
+            content: content
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          message.textContent = "Announcement published successfully!";
+          message.style.color = "green";
+
+          setTimeout(function() {
+            window.location.href = "/dashboard.html";
+          }, 1000);
+
+        } else {
+          message.textContent = data.message || "Could not publish announcement.";
+          message.style.color = "red";
+        }
+
+      } catch (error) {
+        message.textContent = "Cannot connect to the server.";
+        message.style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>

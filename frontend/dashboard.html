@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- ADMIN DASHBOARD: table to manage the announcements (Edit / Delete work once the backend exists) -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard - University of Boumerdès</title>
+  <link rel="icon" href="img/logo.png">
+  <!-- All the design is in style.css -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ADMIN LAYOUT: menu on the left, content on the right -->
+  <div class="admin">
+    <aside class="sidebar">
+      <img class="login-logo" src="img/logo.png" alt="Logo of the university">
+      <p><strong>University of Boumerdès</strong><br><small>Admin panel</small></p>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="announcements.html">Public announcements</a>
+      <a href="index.html">View website</a>
+      <a href="login.html">Sign out</a>
+    </aside>
+    <main class="admin-main">
+      <div class="page-head">
+        <div>
+          <p class="small-text">Administration</p>
+          <h1>Dashboard</h1>
+          <p>Manage the announcements shown on the university website.</p>
+        </div>
+        <a class="btn" href="form.html">+ Add Announcement</a>
+      </div>
+
+     
+<h2>Announcements <small id="totalCount">(0 total)</small></h2>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Content</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="announcementList">
+    </tbody>
+  </table>
+</div>
+
+<script>
+async function loadAnnouncements() {
+  const response = await fetch("/api/announcements");
+  const announcements = await response.json();
+
+  const list = document.getElementById("announcementList");
+  const total = document.getElementById("totalCount");
+
+  list.innerHTML = "";
+  total.textContent = `(${announcements.length} total)`;
+
+  announcements.forEach(function(item) {
+    const row = document.createElement("tr");
+
+    const title = document.createElement("td");
+    title.textContent = item.title;
+
+    const date = document.createElement("td");
+   date.textContent = new Date(item.created_at).toLocaleString("fr-FR", {
+  timeZone: "Africa/Algiers",
+  dateStyle: "medium",
+  timeStyle: "short"
+});
+
+    const content = document.createElement("td");
+    content.textContent = item.content;
+
+    const actions = document.createElement("td");
+    actions.textContent = "Saved";
+
+    row.appendChild(title);
+    row.appendChild(date);
+    row.appendChild(content);
+    row.appendChild(actions);
+
+    list.appendChild(row);
+  });
+}
+
+loadAnnouncements();
+</script>
+
+    </main>
+  </div>
+</body>
+</html>

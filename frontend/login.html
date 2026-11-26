@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Login - University of Boumerdès</title>
+  <link rel="icon" href="img/logo.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-page">
+  <main class="login-box">
+    <img class="login-logo" src="img/logo.png" alt="Logo of the university">
+
+    <h1>Admin Login</h1>
+    <p>Sign in to manage university announcements.</p>
+
+    <!-- JavaScript sends the login request to Flask -->
+    <form id="loginForm">
+      <label for="username">Username or email</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="admin@univ-boumerdes.dz"
+        autocomplete="username"
+        required
+      >
+
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Enter your password"
+        autocomplete="current-password"
+        required
+      >
+
+      <p class="error" id="errorMessage" hidden></p>
+
+      <button class="btn" type="submit">Login</button>
+    </form>
+
+    <p><a href="index.html">Back to university website</a></p>
+  </main>
+
+  <script>
+    const loginForm = document.getElementById("loginForm");
+    const errorMessage = document.getElementById("errorMessage");
+
+    loginForm.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const response = await fetch("/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            username: username,
+            password: password
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          window.location.href = "/dashboard.html";
+        } else {
+          errorMessage.textContent = data.message;
+          errorMessage.hidden = false;
+        }
+
+      } catch (error) {
+        errorMessage.textContent = "Cannot connect to the server.";
+        errorMessage.hidden = false;
+      }
+    });
+  </script>
+</body>
+</html>

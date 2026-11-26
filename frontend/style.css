@@ -1,0 +1,644 @@
+/* ==========================================
+   style.css - design of the university website
+   1 General | 2 Header | 3 Buttons | 4 Home
+   5 Cards | 6 Footer | 7 Login and forms
+   8 Admin | 9 Phones
+   ========================================== */
+
+
+/* ========== 1. GENERAL ========== */
+
+/* Colors used everywhere: change them here and the whole site changes */
+:root {
+  --green: #35453d;        /* main dark green */
+  --green-light: #4a5f54;  /* green when the mouse is over a button */
+  --tint: #f1f5f2;         /* very light green background */
+  --line: #dde3df;         /* thin borders */
+  --text: #26332d;         /* main text */
+  --muted: #5b6a62;        /* softer text */
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background: #fff;
+}
+
+h1, h2, h3, h4 {
+  margin: 0 0 10px;
+  line-height: 1.25;
+}
+
+h1 { font-size: 36px; }
+h2 { font-size: 26px; }
+h3 { font-size: 19px; }
+
+p {
+  margin: 0 0 12px;
+}
+
+a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Outline when using the keyboard (Tab key) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #c9962b;
+  outline-offset: 2px;
+}
+
+/* Centers the content of the page */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.small-text {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+
+/* ========== 2. HEADER ========== */
+
+/* Header = white part (logo) + green part (menu) */
+.header {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 24px;
+  color: var(--text);
+}
+
+.logo-area:hover {
+  text-decoration: none;
+}
+
+.logo-area img {
+  height: 52px;
+}
+
+.logo-area strong {
+  font-size: 18px;
+}
+
+.logo-area small {
+  color: var(--muted);
+}
+
+/* The green part. clip-path cuts the left side in a slanted line */
+.menu-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 24px 0 80px;
+  background: var(--green);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50px 100%);
+}
+
+.menu-bar a {
+  padding: 7px 16px;
+  border: 1px solid #7d8f85;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 15px;
+}
+
+.menu-bar a:hover {
+  background: var(--green-light);
+  text-decoration: none;
+}
+
+/* The page we are on = white button */
+.menu-bar a.active {
+  background: #fff;
+  border-color: #fff;
+  color: var(--green);
+  font-weight: 600;
+}
+
+.menu-bar a.login-link {
+  background: #e3e8e5;
+  border-color: #e3e8e5;
+  color: var(--text);
+}
+
+
+/* ========== 3. BUTTONS ========== */
+
+.btn {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 10px 20px;
+  border: 1px solid var(--green);
+  border-radius: 6px;
+  background: var(--green);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: var(--green-light);
+  text-decoration: none;
+}
+
+/* White button with a green border */
+.btn-light {
+  background: #fff;
+  color: var(--green);
+}
+
+.btn-light:hover {
+  background: var(--tint);
+}
+
+.btn-red {
+  background: #fff;
+  border-color: #b3261e;
+  color: #b3261e;
+}
+
+.btn-red:hover {
+  background: #fbeaea;
+}
+
+.btn-small {
+  padding: 4px 12px;
+  font-size: 14px;
+}
+
+
+/* ========== 4. HOME PAGE ========== */
+
+/* Light band behind the hero (same color as the page titles) */
+.hero-band {
+  background: var(--tint);
+  border-bottom: 1px solid var(--line);
+}
+
+/* Hero: text on the left, photos on the right */
+.hero {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.hero-text,
+.hero-photos {
+  flex: 1;
+}
+
+.hero h1 {
+  margin-bottom: 14px;
+  font-size: 42px;
+}
+
+.lead {
+  margin-bottom: 22px;
+  font-size: 18px;
+  color: var(--muted);
+}
+
+.hero-photos img {
+  display: block;
+  width: 100%;
+  height: 170px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.hero-photos img.photo-big {
+  height: 230px;
+}
+
+.caption {
+  margin: 6px 0 14px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.section {
+  padding-top: 44px;
+}
+
+/* Title on the left, link on the right, thin line under */
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.section-title h2 {
+  margin: 0;
+}
+
+/* About box: 2 columns (text + list) */
+.about {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 40px;
+  padding: 28px 30px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--tint);
+}
+
+.check-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.check-list li {
+  position: relative;
+  margin-bottom: 8px;
+  padding-left: 26px;
+}
+
+.check-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--green);
+  font-weight: bold;
+}
+
+/* Title banner at the top of the inner pages */
+.page-title {
+  padding: 28px 0 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--tint);
+}
+
+.page-title h1 {
+  font-size: 32px;
+}
+
+
+/* ========== 5. CARDS ========== */
+
+/* Grids: 2 or 3 columns */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px;
+}
+
+/* Announcement card: green bar on the left */
+.card {
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--green);
+  border-radius: 4px;
+  background: #fff;
+}
+
+.card h3 {
+  margin: 6px 0;
+}
+
+.card p {
+  margin-bottom: 0;
+}
+
+.meta {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* Category label (Campus / Academic / Events) */
+.badge {
+  margin-right: 6px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: var(--tint);
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Department card: picture on top, text below */
+.dept {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+}
+
+.dept:hover {
+  border-color: var(--green);
+}
+
+.dept img {
+  display: block;
+  width: 100%;
+}
+
+.dept-body {
+  padding: 16px 18px 18px;
+}
+
+.dept-body h3 {
+  color: var(--green);
+}
+
+.dept-body a {
+  font-weight: 600;
+}
+
+
+/* ========== 6. FOOTER ========== */
+
+.footer {
+  margin-top: 56px;
+  padding: 40px 0 16px;
+  background: var(--green);
+  color: #d4dcd7;
+}
+
+.footer h4 {
+  color: #fff;
+}
+
+.footer a {
+  color: #d4dcd7;
+}
+
+.footer ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer li {
+  margin-bottom: 6px;
+}
+
+.footer-cols {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.footer-cols > div {
+  flex: 1;
+  min-width: 190px;
+}
+
+.footer-logo {
+  height: 46px;
+  padding: 3px;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.footer .btn-light {
+  color: var(--green);
+}
+
+.copyright {
+  margin: 28px 0 0;
+  padding-top: 14px;
+  border-top: 1px solid #5d7065;
+  font-size: 14px;
+}
+
+
+/* ========== 7. LOGIN PAGE and FORMS ========== */
+
+.login-page {
+  background: var(--tint);
+}
+
+/* White card in the middle of the page */
+.login-box {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.login-logo {
+  height: 56px;
+}
+
+label {
+  display: block;
+  margin: 14px 0 5px;
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #b9c4bd;
+  border-radius: 5px;
+  background: #fff;
+  font-size: 15px;
+  font-family: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--green);
+}
+
+/* Red error text (login) */
+.error {
+  margin-top: 10px;
+  color: #b3261e;
+}
+
+.login-box .btn,
+.form .btn {
+  margin-top: 18px;
+}
+
+.login-box form + p {
+  margin-top: 20px;
+}
+
+.form {
+  max-width: 620px;
+}
+
+
+/* ========== 8. ADMIN PAGES ========== */
+
+/* Menu on the left, content on the right */
+.admin {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 230px;
+  padding: 24px 18px;
+  background: var(--green);
+  color: #fff;
+}
+
+.sidebar a {
+  display: block;
+  margin-bottom: 4px;
+  padding: 9px 12px;
+  border-radius: 4px;
+  color: #d4dcd7;
+}
+
+.sidebar a:hover {
+  background: var(--green-light);
+  text-decoration: none;
+}
+
+.sidebar a.active {
+  background: var(--green-light);
+  color: #fff;
+}
+
+.sidebar img {
+  padding: 3px;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.admin-main {
+  flex: 1;
+  padding: 30px 36px;
+  background: #f8faf8;
+}
+
+/* Title on the left, button on the right */
+.page-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+th,
+td {
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  text-align: left;
+}
+
+th {
+  background: var(--tint);
+}
+
+/* Every second row is a little darker, row under the mouse is green */
+tr:nth-child(even) td {
+  background: #fafcfa;
+}
+
+tr:hover td {
+  background: var(--tint);
+}
+
+
+/* ========== 9. PHONES AND TABLETS ========== */
+
+/* These rules only work on screens smaller than 800px */
+@media (max-width: 800px) {
+
+  h1 { font-size: 30px; }
+  .hero h1 { font-size: 32px; }
+
+  .header {
+    flex-direction: column;
+  }
+
+  .menu-bar {
+    flex-wrap: wrap;
+    padding: 12px 24px;
+    clip-path: none;
+  }
+
+  .hero,
+  .admin {
+    flex-direction: column;
+  }
+
+  .hero {
+    gap: 28px;
+  }
+
+  .about,
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .admin-main {
+    min-width: 0;
+    padding: 24px 20px;
+  }
+
+  .page-head {
+    flex-direction: column;
+  }
+
+  /* Table can be scrolled sideways on a small screen */
+  .table-wrap {
+    overflow-x: auto;
+  }
+}
